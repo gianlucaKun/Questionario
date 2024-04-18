@@ -24,8 +24,4 @@ public class Quiz {
     private Long id;
     private String titolo;
     private String descrizione;
-
-    @ManyToMany
-    private List<Utente> utente;
-
 }

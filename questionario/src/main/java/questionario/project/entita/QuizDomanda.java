@@ -1,8 +1,5 @@
 package questionario.project.entita;
 
-
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,20 +14,17 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UtenteQuiz {
+public class QuizDomanda {
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     
     @ManyToOne
-    private Utente  utente;
+    private Quiz quiz;
     
     @ManyToOne
-    private Quiz  quiz;
+    private Domanda Domanda;
     
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
-    private String note;
-
+    private Long sorting;
 }

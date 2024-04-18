@@ -1,36 +1,32 @@
 package questionario.project.entita;
 
-
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UtenteQuiz {
+public class UtenteQuizDomandaRisposta {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
     
     @ManyToOne
-    private Utente  utente;
+    private UtenteQuizDomanda UtenteQuizDomanda;
     
     @ManyToOne
-    private Quiz  quiz;
+    private Risposta risposta;
     
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
-    private String note;
+    private Boolean checked;
 
 }

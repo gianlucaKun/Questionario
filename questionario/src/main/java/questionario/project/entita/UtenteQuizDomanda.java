@@ -13,12 +13,20 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Risposta {
+public class UtenteQuizDomanda {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    private String testo;
-    private Boolean corretta;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@ManyToOne
+	private UtenteQuiz UtenteQuiz;
+
+	@ManyToOne
+	private Domanda Domanda;
+
+	private String utenteNote;
+	private String teacherNotes;
+	private Boolean doLater;
+	private Long points;
 }
