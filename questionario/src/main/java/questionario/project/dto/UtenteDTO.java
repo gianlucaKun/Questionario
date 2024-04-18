@@ -15,6 +15,4 @@ public class UtenteDTO {
     private Long id;
     private String username;
 
-    private List<QuizDTO> quiz;
-
 }

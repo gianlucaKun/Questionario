@@ -21,4 +21,7 @@ public class Risposta {
     
     private String testo;
     private Boolean corretta;
+    
+    @ManyToOne
+    private Domanda domanda;
 }

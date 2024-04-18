@@ -17,11 +17,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "utente_quiz")
 public class UtenteQuiz {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     
     @ManyToOne
     private Utente  utente;

@@ -16,8 +16,4 @@ public class DomandaDTO {
     private Long id;
     private String testo;
 
-    private Quiz quiz;
-
-    private List<RispostaDTO> risposta;
-
 }

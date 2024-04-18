@@ -13,7 +13,5 @@ public class RispostaDTO {
     private Long id;
     private String testo;
     private Boolean corretta;
-
-    private DomandaDTO domanda;
-
+    private Long domandaId;
 }

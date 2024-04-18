@@ -26,5 +26,4 @@ public class QuizDomanda {
     @ManyToOne
     private Domanda Domanda;
     
-    private Long sorting;
 }
