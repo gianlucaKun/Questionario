@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import questionario.project.dto.QuizDTO;
+import questionario.project.dto.proiezione.QuizProiezione;
 import questionario.project.service.QuizService;
 
 @RestController
@@ -45,6 +46,11 @@ public class QuizController {
 	@DeleteMapping("/delete")
 	public void delete(@RequestParam("id") Long id) {
 		qs.delete(id);
+	}
+	
+	@GetMapping("/getFullQuiz")
+	public QuizProiezione getFull(@RequestParam("id") Long id) {
+		return qs.getFullQuiz(id);
 	}
 	
 }

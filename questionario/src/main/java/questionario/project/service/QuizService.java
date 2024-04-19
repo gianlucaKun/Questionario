@@ -1,11 +1,13 @@
 package questionario.project.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import questionario.project.dto.QuizDTO;
+import questionario.project.dto.proiezione.DomandaProiezione;
 import questionario.project.dto.proiezione.QuizProiezione;
 import questionario.project.entita.Quiz;
 import questionario.project.mapper.QuizMapper;
@@ -54,16 +56,17 @@ public class QuizService {
 	QuizDomandaRepository qdr;
 	
 	//getAllquiz
-	public QuizProiezione getAllQuiz(Long id) {
+	public QuizProiezione getFullQuiz(Long id) {
 		QuizProiezione q = new QuizProiezione();
 		q.setId(id);
 		q.setTitolo(qr.findById(id).orElse(null).getTitolo());
 		q.setDescrizione(qr.findById(id).orElse(null).getDescrizione());
-		
+		List<DomandaProiezione> lista = new ArrayList(); 
 		for(Long q2 : qdr.findDomandebyQuiz(id)) {
-			
+			lista.add(ds.getRisposte(q2));
 		}
+		q.setListaDomande(lista);
 		
-		return null;
+		return q;
 	}
 }
