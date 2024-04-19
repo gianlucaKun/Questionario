@@ -1,5 +1,7 @@
 package questionario.project.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -18,4 +20,6 @@ public interface UtenteQuizDomandaMapper {
     @Mapping(source = "utenteQuizId", target = "utenteQuiz.id")
     @Mapping(source = "domandaId", target = "domanda.id")
     UtenteQuizDomanda utenteQuizDomandaDtoToEntity(UtenteQuizDomandaDTO utenteQuizDomandaDTO);
+
+	List<UtenteQuizDomandaDTO> utenteQuizDomandaToDtoList(List<UtenteQuizDomanda> all);
 }

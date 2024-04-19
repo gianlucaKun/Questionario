@@ -9,6 +9,7 @@ import questionario.project.dto.UtenteQuizDomandaRispostaDTO;
 import questionario.project.entita.UtenteQuizDomandaRisposta;
 import questionario.project.mapper.UtenteQuizDomandaRispostaMapper;
 import questionario.project.repository.RispostaRepository;
+import questionario.project.repository.UtenteQuizDomandaRepository;
 import questionario.project.repository.UtenteQuizDomandaRispostaRepository;
 
 @Service
@@ -34,12 +35,14 @@ public class UtenteQuizDomandaRispostaService {
 	}
 	@Autowired
 	RispostaRepository rr;
+	@Autowired
+	UtenteQuizDomandaRepository uqdr;
 	//update
 	public UtenteQuizDomandaRispostaDTO update(UtenteQuizDomandaRispostaDTO rb, Long id) {
 		UtenteQuizDomandaRisposta r = uqdrr.findById(id).orElse(null);
 		r.setChecked(rb.getChecked() != null ? rb.getChecked() : r.getChecked());
 		r.setRisposta(rr.findById(rb.getRispostaId()) != null ? rr.findById(rb.getRispostaId()).orElse(null) : r.getRisposta());
-		//ricordati di modificare utenteQuizDomanda
+		r.setUtenteQuizDomanda(uqdr.findById(rb.getUtenteQuizDomandaId()) != null ? uqdr.findById(rb.getUtenteQuizDomandaId()).orElse(null) : r.getUtenteQuizDomanda());
 		uqdrr.save(r);
 		return uqdrm.utenteQuizDomandaRispostaToDto(r);
 	}
