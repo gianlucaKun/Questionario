@@ -61,7 +61,7 @@ public class QuizService {
 		q.setId(id);
 		q.setTitolo(qr.findById(id).orElse(null).getTitolo());
 		q.setDescrizione(qr.findById(id).orElse(null).getDescrizione());
-		List<DomandaProiezione> lista = new ArrayList(); 
+		List<DomandaProiezione> lista = new ArrayList<DomandaProiezione>(); 
 		for(Long q2 : qdr.findDomandebyQuiz(id)) {
 			lista.add(ds.getRisposte(q2));
 		}
