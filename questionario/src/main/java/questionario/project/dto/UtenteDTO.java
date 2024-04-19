@@ -12,5 +12,6 @@ public class UtenteDTO {
 	
     private Long id;
     private String username;
+    private String password;
 
 }
