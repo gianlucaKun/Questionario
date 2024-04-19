@@ -1,56 +1,72 @@
 package questionario.project.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import questionario.project.dto.QuizDTO;
+import questionario.project.dto.proiezione.DomandaProiezione;
+import questionario.project.dto.proiezione.QuizProiezione;
 import questionario.project.entita.Quiz;
 import questionario.project.mapper.QuizMapper;
+import questionario.project.repository.QuizDomandaRepository;
 import questionario.project.repository.QuizRepository;
-import questionario.project.repository.UtenteRepository;
 
 @Service
 public class QuizService {
-	
+
 	@Autowired
 	QuizRepository qr;
 	
 	@Autowired
 	QuizMapper qm;
 	
-	//crud essenziali
-	public void addNew(QuizDTO q) {
+	//crud basic
+	//add
+	public void add(QuizDTO q) {
 		qr.save(qm.toEntity(q));
 	}
-	
-	public QuizDTO update(QuizDTO qn, Long id) {
+	//select * all
+	public List<QuizDTO> selectAll(){
+		return qm.toDTOList(qr.findAll());
+	}
+	//select where id
+	public QuizDTO selectById(Long id) {
+		return qm.toDTO(qr.findById(id).orElse(null));
+	}
+	//update
+	public QuizDTO update(QuizDTO qb, Long id) {
 		Quiz q = qr.findById(id).orElse(null);
-		q.setDescrizione(qn.getDescrizione() != null ? qn.getDescrizione() : q.getDescrizione());
-		q.setTitolo(qn.getTitolo() != null ? qn.getTitolo() : q.getTitolo());
+		q.setDescrizione(qb.getDescrizione() != null ? qb.getDescrizione() : q.getDescrizione());
+		q.setTitolo(qb.getTitolo() != null ? qb.getTitolo() : q.getTitolo());
 		qr.save(q);
 		return qm.toDTO(q);
 	}
-	
+	//delete
 	public void delete(Long id) {
 		qr.deleteById(id);
 	}
 	
-	public QuizDTO getById(Long id) {
-		return qm.toDTO(qr.findById(id).orElse(null));
-	}
 	@Autowired
-	UtenteRepository ur;
+	DomandaService ds;
 	
-	public void addUtente(Long id, Long id_utente) {
-		Quiz q = qr.findById(id).orElse(null);
-		q.getUtente().add(ur.findById(id_utente).orElse(null));
-		qr.save(q);
-	}
+	@Autowired
+	QuizDomandaRepository qdr;
 	
-	public List<QuizDTO> getAll() {
-		return qm.toDTOList(qr.findAll());
+	//getAllquiz
+	public QuizProiezione getFullQuiz(Long id) {
+		QuizProiezione q = new QuizProiezione();
+		q.setId(id);
+		q.setTitolo(qr.findById(id).orElse(null).getTitolo());
+		q.setDescrizione(qr.findById(id).orElse(null).getDescrizione());
+		List<DomandaProiezione> lista = new ArrayList(); 
+		for(Long q2 : qdr.findDomandebyQuiz(id)) {
+			lista.add(ds.getRisposte(q2));
+		}
+		q.setListaDomande(lista);
+		
+		return q;
 	}
-
 }
