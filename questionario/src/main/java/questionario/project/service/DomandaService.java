@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import questionario.project.dto.DomandaDTO;
+import questionario.project.dto.proiezione.DomandaProiezione;
 import questionario.project.entita.Domanda;
 import questionario.project.mapper.DomandaMapper;
+import questionario.project.mapper.RispostaMapper;
 import questionario.project.repository.DomandaRepository;
+import questionario.project.repository.RispostaRepository;
 
 @Service
 public class DomandaService {
@@ -44,4 +47,18 @@ public class DomandaService {
 		dr.deleteById(id);
 	}
 	
+	@Autowired
+	RispostaRepository rr;
+	
+	@Autowired
+	RispostaMapper rm;
+	
+    public DomandaProiezione getRisposte(Long domandaId) {
+    	DomandaProiezione d = new DomandaProiezione();
+    	d.setId(domandaId);
+    	d.setDomandaTesto(dr.findById(domandaId).orElse(null).getTesto());
+    	d.setListaRisposte(rm.toDTOList(rr.findByDomandaId(domandaId)));
+		return d;
+    }
+    
 }

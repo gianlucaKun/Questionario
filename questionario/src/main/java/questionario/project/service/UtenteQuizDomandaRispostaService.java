@@ -41,8 +41,8 @@ public class UtenteQuizDomandaRispostaService {
 	public UtenteQuizDomandaRispostaDTO update(UtenteQuizDomandaRispostaDTO rb, Long id) {
 		UtenteQuizDomandaRisposta r = uqdrr.findById(id).orElse(null);
 		r.setChecked(rb.getChecked() != null ? rb.getChecked() : r.getChecked());
-		r.setRisposta(rr.findById(rb.getRispostaId()) != null ? rr.findById(rb.getRispostaId()).orElse(null) : r.getRisposta());
-		r.setUtenteQuizDomanda(uqdr.findById(rb.getUtenteQuizDomandaId()) != null ? uqdr.findById(rb.getUtenteQuizDomandaId()).orElse(null) : r.getUtenteQuizDomanda());
+		r.setRisposta(rb.getRispostaId() != null ? rr.findById(rb.getRispostaId()).orElse(null) : r.getRisposta());
+		r.setUtenteQuizDomanda(rb.getUtenteQuizDomandaId() != null ? uqdr.findById(rb.getUtenteQuizDomandaId()).orElse(null) : r.getUtenteQuizDomanda());
 		uqdrr.save(r);
 		return uqdrm.utenteQuizDomandaRispostaToDto(r);
 	}

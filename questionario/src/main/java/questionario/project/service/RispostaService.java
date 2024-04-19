@@ -40,7 +40,7 @@ public class RispostaService {
 		Risposta r = rr.findById(id).orElse(null);
 		r.setTesto(rb.getTesto() != null ? rb.getTesto() : r.getTesto());
 		r.setCorretta(rb.getCorretta() != null ? rb.getCorretta() : r.getCorretta());
-		r.setDomanda(dr.findById(rb.getDomandaId()) != null ? dr.findById(rb.getDomandaId()).orElse(null) : r.getDomanda());
+		r.setDomanda(rb.getDomandaId() != null ? dr.findById(rb.getDomandaId()).orElse(null) : r.getDomanda());
 		rr.save(r);
 		return rm.toDTO(r);
 	}

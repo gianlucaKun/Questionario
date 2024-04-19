@@ -40,8 +40,8 @@ public class UtenteQuizService {
 	//update
 	public UtenteQuizDTO update(UtenteQuizDTO uq, Long id) {
 		UtenteQuiz u = uqr.findById(id).orElse(null);
-		u.setUtente(ur.findById(uq.getUtenteId()) != null ? ur.findById(uq.getUtenteId()).orElse(null) : u.getUtente());
-		u.setQuiz(qr.findById(uq.getQuizId()) != null ? qr.findById(uq.getQuizId()).orElse(null) : u.getQuiz());
+		u.setUtente(uq.getUtenteId() != null ? ur.findById(uq.getUtenteId()).orElse(null) : u.getUtente());
+		u.setQuiz(uq.getQuizId() != null ? qr.findById(uq.getQuizId()).orElse(null) : u.getQuiz());
 		u.setNote(uq.getNote() != null ? uq.getNote() : u.getNote());
 		u.setStartTime(uq.getStartTime() != null ? uq.getStartTime() : u.getStartTime());
 		u.setEndTime(uq.getEndTime() != null ? uq.getEndTime() : u.getEndTime());

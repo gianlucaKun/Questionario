@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import questionario.project.dto.DomandaDTO;
+import questionario.project.dto.proiezione.DomandaProiezione;
 import questionario.project.service.DomandaService;
 
 @RestController
@@ -46,5 +47,11 @@ public class DomandaController {
 	public void delete(@RequestParam("id") Long id) {
 		ds.delete(id);
 	}
+	
+	@GetMapping("/risposte")
+	public DomandaProiezione getRisposte(@RequestParam("id") Long id) {
+		return ds.getRisposte(id);
+	}
+	
 	
 }

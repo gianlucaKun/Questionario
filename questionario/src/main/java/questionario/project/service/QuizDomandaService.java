@@ -43,8 +43,8 @@ public class QuizDomandaService {
 	//update
 	public QuizDomandaDTO update(QuizDomandaDTO qdb, Long id) {
 		QuizDomanda qd = qdr.findById(id).orElse(null);
-		qd.setDomanda(dr.findById(qdb.getDomandaId()) != null ? dr.findById(qdb.getDomandaId()).orElse(null) : qd.getDomanda());
-		qd.setQuiz(qr.findById(qdb.getQuizId()) != null ? qr.findById(qdb.getQuizId()).orElse(null) : qd.getQuiz());
+		qd.setDomanda(qdb.getDomandaId() != null ? dr.findById(qdb.getDomandaId()).orElse(null) : qd.getDomanda());
+		qd.setQuiz(qdb.getQuizId() != null ? qr.findById(qdb.getQuizId()).orElse(null) : qd.getQuiz());
 		qdr.save(qd);
 		return qdm.quizDomandaToDto(qd);
 	}

@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import questionario.project.dto.QuizDTO;
+import questionario.project.dto.proiezione.QuizProiezione;
 import questionario.project.entita.Quiz;
 import questionario.project.mapper.QuizMapper;
+import questionario.project.repository.QuizDomandaRepository;
 import questionario.project.repository.QuizRepository;
 
 @Service
@@ -43,5 +45,25 @@ public class QuizService {
 	//delete
 	public void delete(Long id) {
 		qr.deleteById(id);
+	}
+	
+	@Autowired
+	DomandaService ds;
+	
+	@Autowired
+	QuizDomandaRepository qdr;
+	
+	//getAllquiz
+	public QuizProiezione getAllQuiz(Long id) {
+		QuizProiezione q = new QuizProiezione();
+		q.setId(id);
+		q.setTitolo(qr.findById(id).orElse(null).getTitolo());
+		q.setDescrizione(qr.findById(id).orElse(null).getDescrizione());
+		
+		for(Long q2 : qdr.findDomandebyQuiz(id)) {
+			
+		}
+		
+		return null;
 	}
 }

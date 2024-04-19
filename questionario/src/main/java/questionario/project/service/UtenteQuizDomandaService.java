@@ -45,8 +45,8 @@ public class UtenteQuizDomandaService {
 		u.setPoints(ub.getPoints() != null ? ub.getPoints() : u.getPoints());
 		u.setUtenteNote(ub.getUtenteNote() != null ? ub.getUtenteNote() : u.getUtenteNote());
 		u.setTeacherNotes(ub.getTeacherNotes() != null ? ub.getTeacherNotes() : u.getTeacherNotes());
-		u.setDomanda(dr.findById(ub.getDomandaId()) != null ? dr.findById(ub.getDomandaId()).orElse(null) : u.getDomanda());
-		u.setUtenteQuiz(uqr.findById(ub.getUtenteQuizId()) != null ? uqr.findById(ub.getUtenteQuizId()).orElse(null) : u.getUtenteQuiz());
+		u.setDomanda(ub.getDomandaId() != null ? dr.findById(ub.getDomandaId()).orElse(null) : u.getDomanda());
+		u.setUtenteQuiz(ub.getUtenteQuizId() != null ? uqr.findById(ub.getUtenteQuizId()).orElse(null) : u.getUtenteQuiz());
 		uqdr.save(u);
 		return uqdm.utenteQuizDomandaToDto(u);
 	}
