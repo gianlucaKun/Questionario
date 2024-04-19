@@ -44,4 +44,17 @@ public class UtenteService {
 		ur.deleteById(id);
 	}
 	
+	public boolean login(String username, String password) {
+        // Recupera l'utente dal repository in base al nome utente
+        Utente user = ur.findByUsername(username);
+
+        // Controlla se l'utente esiste e se la password è corretta
+        if (user != null && user.getPassword().equals(password)) {
+        	
+            return true; // L'autenticazione ha avuto successo
+        } else {
+            return false; // L'autenticazione ha fallito
+        }
+	}
+	
 }
