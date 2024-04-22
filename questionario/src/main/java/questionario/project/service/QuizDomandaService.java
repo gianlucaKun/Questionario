@@ -88,7 +88,7 @@ public class QuizDomandaService {
 	        existingDomanda = new DomandaProiezione();
 	        existingDomanda.setId(domandaId);
 	        existingDomanda.setDomandaTesto(domandaTesto);
-
+	       // existingDomanda.setDoLater(existingDomanda.getDoLater());
 	        List<RispostaDTO> listaRisposte = qdr.findRisposteByDomanda(domandaId);
 	        existingDomanda.setListaRisposte(listaRisposte);
 

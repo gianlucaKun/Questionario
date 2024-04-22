@@ -12,5 +12,6 @@ import questionario.project.dto.RispostaDTO;
 public class DomandaProiezione {
     private Long id;
     private String domandaTesto;
+    private Boolean doLater = false;
     private List<RispostaDTO> listaRisposte;
 }
