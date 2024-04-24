@@ -14,8 +14,8 @@ import questionario.project.service.UtenteService;
 import questionario.project.service.security.JwtService;
 
 @RestController
-@RequestMapping("/Jwt")
-@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:5173/")
 public class LoginController {
 	
     @Autowired

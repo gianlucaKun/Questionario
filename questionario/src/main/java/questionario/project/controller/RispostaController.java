@@ -18,7 +18,7 @@ import questionario.project.service.RispostaService;
 
 @RestController
 @RequestMapping("/risposta")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:5173/")
 public class RispostaController {
 	
 	@Autowired

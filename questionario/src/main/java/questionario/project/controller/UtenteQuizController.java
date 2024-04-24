@@ -18,7 +18,7 @@ import questionario.project.service.UtenteQuizService;
 
 @RestController
 @RequestMapping("/utente/quiz")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:5173/")
 public class UtenteQuizController {
 	
 	@Autowired
