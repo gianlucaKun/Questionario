@@ -15,8 +15,14 @@ public interface QuizDomandaRepository extends JpaRepository<QuizDomanda,Long>{
     List<Long> findDomandebyQuiz(@Param("input") Long input);
 
     //TEST
-    @Query(value = "SELECT *\r\n"
-    		+ "FROM questionario.quiz_domanda\r\n"
+    @Query(value =  "SELECT *"
+    		+ "FROM questionario.utente_quiz_domanda\r\n"
+    		+ "inner JOIN questionario.utente_quiz\r\n"
+    		+ "on utente_quiz.id = utente_quiz_domanda.utente_quiz_id\r\n"
+    		+ "inner join questionario.quiz\r\n"
+    		+ "on utente_quiz.id = quiz.id\r\n"
+    		+ "Inner join questionario.quiz_domanda\r\n"
+    		+ "on quiz_domanda.quiz_id = quiz.id\r\n"
     		+ "INNER JOIN questionario.domanda\r\n"
     		+ "    ON domanda.id = quiz_domanda.domanda_id\r\n"
     		+ "INNER JOIN questionario.risposta\r\n"
@@ -37,6 +43,14 @@ public interface QuizDomandaRepository extends JpaRepository<QuizDomanda,Long>{
 //	+ "on utente_quiz.id = quiz.id\r\n"
 //	+ "Inner join questionario.quiz_domanda\r\n"
 //	+ "on quiz_domanda.quiz_id = quiz.id\r\n"
+//	+ "INNER JOIN questionario.domanda\r\n"
+//	+ "    ON domanda.id = quiz_domanda.domanda_id\r\n"
+//	+ "INNER JOIN questionario.risposta\r\n"
+//	+ "    ON risposta.domanda_id = domanda.id\r\n"
+    
+    
+//    "SELECT *\r\n"
+//	+ "FROM questionario.quiz_domanda\r\n"
 //	+ "INNER JOIN questionario.domanda\r\n"
 //	+ "    ON domanda.id = quiz_domanda.domanda_id\r\n"
 //	+ "INNER JOIN questionario.risposta\r\n"

@@ -1,32 +1,33 @@
 package questionario.project.service.security;
 
-import java.util.Date;
-
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
+import questionario.project.service.security.util.JwtConstant;
+
+import javax.crypto.SecretKey;
 
 @Component
 public class JwtValidator {
-	
-    @Value("${jwt.secret}")
-    private String secretKey;
+    
+    private final SecretKey key;
+
+    @Autowired
+    public JwtValidator() {
+        this.key = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
+    }
     
     public boolean validateToken(String token) {
         try {
-            // Effettua il parsing del token JWT e verifica la firma utilizzando la chiave segreta
-            Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
-            System.out.println(claims.get("roles"));
-            System.out.println(claims.get("nome"));
-            Date expirationDate = claims.getExpiration();
-            // Se il parsing è avvenuto con successo, il token è valido
-            return expirationDate.after(new Date());
+            Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+            // Puoi eseguire ulteriori controlli qui, se necessario
+            return true; // Se il token è valido
         } catch (Exception e) {
-            // Se si verifica un'eccezione durante il parsing del token, il token non è valido
-            return false;
+            // Gestisci l'eccezione qui, se necessario
+            return false; // Se il token non è valido
         }
     }
-    
 }

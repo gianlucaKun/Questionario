@@ -63,6 +63,7 @@ public class QuizDomandaService {
 	
 	public QuizProiezione getQuizWithQuestionsAndAnswers(Long quizId) {
 	    List<Object[]> quizData = qdr.findAllDomandaAndRispostaByQuiz(quizId);
+	    
 	    QuizProiezione quizProiezione = new QuizProiezione();
 	    quizProiezione.setId(quizId); // Imposta l'ID del quiz
 	    quizProiezione.setListaDomande(new ArrayList<>()); // Inizializza la lista delle domande
@@ -73,10 +74,10 @@ public class QuizDomandaService {
 	}
 
 	private void mapToDomandaProiezione(Object[] result, QuizProiezione quizProiezione) {
-	    
-	    String domandaTesto = (String) result[4];
+	    String domandaTesto = (String) result[20];
 	    Long domandaId = dr.findDomandaIdByTesto(domandaTesto);
 
+	    
 	    // Verifica se la domanda è già stata mappata precedentemente
 	    DomandaProiezione existingDomanda = quizProiezione.getListaDomande().stream()
 	            .filter(domanda -> domanda.getId().equals(domandaId))
@@ -88,7 +89,6 @@ public class QuizDomandaService {
 	        existingDomanda = new DomandaProiezione();
 	        existingDomanda.setId(domandaId);
 	        existingDomanda.setDomandaTesto(domandaTesto);
-	       // existingDomanda.setDoLater(existingDomanda.getDoLater());
 	        List<RispostaDTO> listaRisposte = qdr.findRisposteByDomanda(domandaId);
 	        existingDomanda.setListaRisposte(listaRisposte);
 
