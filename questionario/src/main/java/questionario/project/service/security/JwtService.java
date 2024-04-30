@@ -47,19 +47,32 @@ public class JwtService {
 	    String jwt = Jwts.builder()
 	            .setIssuedAt(issuedAt)
 	            .setExpiration(expiration)
-	            .claim("email", auth.getName())
+	            .claim("username", auth.getName())
 	            .signWith(key)
 	            .compact();
 	    return jwt;
 	}
 	
 	public String getUsernameFromJwtToken(String jwt) {
-		jwt=jwt.substring(7);
-		Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
-		String username = String.valueOf(claims.get("username"));
-		return username;
+	    try {
+	        if (jwt.startsWith("Bearer ")) {
+	            jwt = jwt.substring(7); // Rimuovi il prefisso "Bearer "
+	        } else {
+	            System.err.println("Il token non ha il prefisso 'Bearer'");
+	            return null;
+	        }
+
+	        Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
+	        String username = String.valueOf(claims.get("username"));
+	        System.out.println("Username estratto dal token JWT: " + username);
+	        return username;
+	    } catch (Exception e) {
+	        System.err.println("Errore durante l'estrazione del nome utente dal token JWT: " + e.getMessage());
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
-	
+
 	public String populateAuthorities(Collection <? extends GrantedAuthority> collection) {
 		Set<String> auths = new HashSet<>();
 		for(GrantedAuthority authority:collection) {

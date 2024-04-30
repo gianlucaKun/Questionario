@@ -60,10 +60,19 @@ public class UtenteController {
 	@GetMapping("/profile")
 	public ResponseEntity<Utente> getUserProfileHandler(@RequestHeader("Authorization") String jwt) throws UserException {
 
-		Utente user = us.findUserProfileByJwt(jwt);
+	    System.out.println("stampo il valore del token " + jwt);
+	    System.out.println("sono nel controller utente controller ");
 
-		return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+	    // Verifica se il token ha il prefisso "Bearer "
+	    if (!jwt.startsWith("Bearer ")) {
+	        jwt = "Bearer " + jwt; // Aggiungi il prefisso "Bearer " al token
+	    }
+
+	    Utente user = us.findUserProfileByJwt(jwt);
+
+	    return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
 	}
+
 	
 	
 }

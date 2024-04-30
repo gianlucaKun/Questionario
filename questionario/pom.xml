@@ -119,11 +119,7 @@
 <artifactId>com.object.biblioteca</artifactId>
 <version>0.0.1-SNAPSHOT</version>
 </dependency>
-	<dependency>
-		<groupId>com.zosh</groupId>
-		<artifactId>Recipe-Sharing</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</dependency>
+	
 </dependencies>
 <build>
 <plugins>

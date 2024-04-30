@@ -65,6 +65,8 @@ public class UtenteService {
 	}
 	public Utente findUserProfileByJwt(String jwt) throws UserException {
 		
+		
+		
 		String username = jwtService.getUsernameFromJwtToken(jwt);
 		
 		System.out.println("USERNAME " + username);
