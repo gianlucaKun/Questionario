@@ -1,6 +1,7 @@
 package questionario.project.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -83,23 +84,25 @@ public class UtenteService {
 //            return false; // L'autenticazione ha fallito
 //        }
 //	}
-//	public Utente findUserProfileByJwt(String jwt) throws UserException {
-//		
-//		
-//		
-//		String username = jwtService.getUsernameFromJwtToken(jwt);
-//		
-//		System.out.println("USERNAME " + username);
-//		
-//		Optional<Utente> user = ur.findByUsername(username);
-//		
-//		if(user.isEmpty()) {
-//			throw new UserException("non esiste un utente con questo username: " + username);
-//		}
-//		
-//		System.out.println("username utente " + user.get().getUsername());
-//		return user.get();
-//	}
+	
+	
+	public Utente findUserProfileByJwt(String jwt) throws UserException {
+		
+		Long id = JwtService.getUserIdFromJwtToken(jwt);
+		
+		System.out.println("id " + id);
+		
+		Optional<Utente> user = ur.findById(id);
+		
+		if(user == null) {
+			throw new UserException("non esiste un utente con questo id: " + id);
+		}
+		
+		System.out.println("username utente " + user.get().getUsername());
+		return user.get();
+	}
+	
+	
 	public UtenteDTO findByUsername(String username) throws UserException {
 
 		Utente utente = ur.findByUsername(username);
@@ -113,6 +116,5 @@ public class UtenteService {
 		} else {
 			throw new UserException("non esiste un utente con questo username: " + username);
 		}
-	}
-	
+	}	
 }

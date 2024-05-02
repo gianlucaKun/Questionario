@@ -57,22 +57,22 @@ public class UtenteController {
 		us.delete(id);
 	}
 
-//	@GetMapping("/profile")
-//	@CrossOrigin(origins = "http://localhost:4200")
-//	public ResponseEntity<Utente> getUserProfileHandler(@RequestHeader("Authorization") String jwt) throws UserException {
-//
-//	    System.out.println("stampo il valore del token " + jwt);
-//	    System.out.println("sono nel controller utente controller ");
-//
-//	    
-//	    if (!jwt.startsWith("Bearer ")) {
-//	        jwt = "Bearer " + jwt;
-//	    }
-//
-//	    Utente user = us.findUserProfileByJwt(jwt);
-//
-//	    return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
-//	}
+	@GetMapping("/profile")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public ResponseEntity<Utente> getUserProfileHandler(@RequestHeader("Authorization") String jwt) throws UserException {
+
+	    System.out.println("stampo il valore del token " + jwt);
+	    System.out.println("sono nel controller utente controller ");
+
+	    
+	    if (!jwt.startsWith("Bearer ")) {
+	        jwt = "Bearer " + jwt;
+	    }
+
+	    Utente user = us.findUserProfileByJwt(jwt);
+
+	    return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+	}
 
 	
 	@GetMapping("/userProfile")
