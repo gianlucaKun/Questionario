@@ -14,7 +14,7 @@ import questionario.project.service.UtenteService;
 import questionario.project.service.security.JwtService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/jwt")
 @CrossOrigin(origins = "http://localhost:5173/")
 public class LoginController {
 	
@@ -26,6 +26,7 @@ public class LoginController {
 	
     @PostMapping("/loginUtente")
     public ResponseEntity<String> login(@RequestBody UtenteDTO loginRequest) {
+    	System.out.println(loginRequest.getUsername() + " | " + loginRequest.getPassword());
         // Esegui l'autenticazione dell'utente
         boolean authenticationResult = us.login(loginRequest.getUsername(), loginRequest.getPassword());
         

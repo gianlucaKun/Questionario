@@ -17,7 +17,7 @@ import questionario.project.dto.UtenteDTO;
 import questionario.project.service.UtenteService;
 
 @RestController
-@RequestMapping("/api/utente")
+@RequestMapping("/utente")
 @CrossOrigin(origins = "http://localhost:5173/")
 public class UtenteController {
 	
@@ -29,7 +29,7 @@ public class UtenteController {
 		return us.selectAll();
 	}
 	
-	@GetMapping("/find")
+	@GetMapping("/api/find")
 	public UtenteDTO select(@RequestParam("id") Long id) {
 		return us.selectById(id);
 	}

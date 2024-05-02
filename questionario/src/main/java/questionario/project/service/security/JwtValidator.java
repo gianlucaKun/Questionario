@@ -11,19 +11,20 @@ import io.jsonwebtoken.Jwts;
 @Component
 public class JwtValidator {
 	
-    @Value("${jwt.secret}")
-    private String secretKey;
+    // Chiave segreta per la firma del token
+    private static final String SECRET_KEY = "laTuaChiaveSegreta";
     
     public boolean validateToken(String token) {
+    	System.out.println("sei nel validator  e il token passato è: " + token);
         try {
             // Effettua il parsing del token JWT e verifica la firma utilizzando la chiave segreta
-            Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
-            System.out.println(claims.get("roles"));
-            System.out.println(claims.get("nome"));
+        	
+            Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
             Date expirationDate = claims.getExpiration();
             // Se il parsing è avvenuto con successo, il token è valido
             return expirationDate.after(new Date());
         } catch (Exception e) {
+        	System.out.println("errore nel token");
             // Se si verifica un'eccezione durante il parsing del token, il token non è valido
             return false;
         }

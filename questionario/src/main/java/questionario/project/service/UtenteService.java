@@ -36,12 +36,23 @@ public class UtenteService {
 	public UtenteDTO update(UtenteDTO ub,Long id) {
 		Utente u = ur.findById(id).orElse(null);
 		u.setUsername(ub.getUsername() != null ? ub.getUsername() : u.getUsername());
+		u.setCognome(ub.getCognome() != null ? ub.getCognome() : u.getCognome());
+		u.setNome(ub.getNome() != null ? ub.getNome() : u.getNome());
+		u.setPassword(ub.getPassword() != null ? ub.getPassword() : u.getPassword());
+		u.setImgUrl(ub.getImgUrl() != null ? ub.getImgUrl() : u.getImgUrl());
+		u.setImgCopertina(ub.getImgCopertina() != null ? ub.getImgCopertina() : u.getImgCopertina());
 		ur.save(u);
 		return um.toDTO(u);
 	}
 	//delete
 	public void delete(Long id) {
 		ur.deleteById(id);
+	}
+	//trova i dati dell'utente tramite username
+	public UtenteDTO trovaUsername(String username) {
+		UtenteDTO u = um.toDTO(ur.findByUsername(username));
+		System.out.println(u.getPassword());
+		return u;
 	}
 	
 	public boolean login(String username, String password) {
