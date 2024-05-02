@@ -8,6 +8,6 @@ import questionario.project.entita.Utente;
 
 public interface UtenteRepository extends JpaRepository<Utente,Long>{
 	
-	public Optional<Utente> findByUsername(String username);
+	public Utente findByUsername(String username);
 	
 }

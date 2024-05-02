@@ -1,9 +1,9 @@
 package questionario.project.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -12,7 +12,6 @@ import questionario.project.entita.Utente;
 import questionario.project.exception.UserException;
 import questionario.project.mapper.UtenteMapper;
 import questionario.project.repository.UtenteRepository;
-import questionario.project.service.security.JwtService;
 
 @Service
 public class UtenteService {
@@ -23,14 +22,35 @@ public class UtenteService {
 	@Autowired
 	UtenteMapper um;
 	
-	@Autowired
-	JwtService jwtService;
-	
+	 @Autowired
+	    private PasswordEncoder passwordEncoder;
+	 
 	//crud basic
-	//add
-	public void add(UtenteDTO u) {
-		ur.save(um.toEntity(u));
+	public UtenteDTO add(UtenteDTO utenteDTO) {
+
+        Utente utente = new Utente();
+        utente.setUsername(utenteDTO.getUsername());
+
+        utente.setPassword(passwordEncoder.encode(utenteDTO.getPassword()));
+        
+
+        ur.save(utente);
+        
+        return um.toDTO(utente);
 	}
+	
+    public Utente login(String username, String password) {
+ 
+        Utente utente = ur.findByUsername(username);
+        
+
+        if (utente != null && passwordEncoder.matches(password, utente.getPassword())) {
+            return utente;
+        } else {
+            return null;
+        }
+    }
+	
 	//select * all
 	public List<UtenteDTO> selectAll() {
 		return um.toDTOList(ur.findAll());
@@ -51,34 +71,48 @@ public class UtenteService {
 		ur.deleteById(id);
 	}
 	
-	public boolean login(String username, String password) {
-        // Recupera l'utente dal repository in base al nome utente
-        Optional<Utente> user = ur.findByUsername(username);
+//	public boolean login(String username, String password) {
+//        // Recupera l'utente dal repository in base al nome utente
+//        Utente user = ur.findByUsername(username);
+//
+//        // Controlla se l'utente esiste e se la password è corretta
+//        if (user != null && user.getPassword().equals(password)) {
+//        	
+//            return true; // L'autenticazione ha avuto successo
+//        } else {
+//            return false; // L'autenticazione ha fallito
+//        }
+//	}
+//	public Utente findUserProfileByJwt(String jwt) throws UserException {
+//		
+//		
+//		
+//		String username = jwtService.getUsernameFromJwtToken(jwt);
+//		
+//		System.out.println("USERNAME " + username);
+//		
+//		Optional<Utente> user = ur.findByUsername(username);
+//		
+//		if(user.isEmpty()) {
+//			throw new UserException("non esiste un utente con questo username: " + username);
+//		}
+//		
+//		System.out.println("username utente " + user.get().getUsername());
+//		return user.get();
+//	}
+	public UtenteDTO findByUsername(String username) throws UserException {
 
-        // Controlla se l'utente esiste e se la password è corretta
-        if (user != null && user.get().getPassword().equals(password)) {
-        	
-            return true; // L'autenticazione ha avuto successo
-        } else {
-            return false; // L'autenticazione ha fallito
-        }
-	}
-	public Utente findUserProfileByJwt(String jwt) throws UserException {
+		Utente utente = ur.findByUsername(username);
 		
-		
-		
-		String username = jwtService.getUsernameFromJwtToken(jwt);
-		
-		System.out.println("USERNAME " + username);
-		
-		Optional<Utente> user = ur.findByUsername(username);
-		
-		if(user.isEmpty()) {
+		if (utente != null) {
+			UtenteDTO savedUtente = new UtenteDTO();
+			savedUtente.setId(utente.getId());
+			savedUtente.setPassword(utente.getPassword());
+			savedUtente.setUsername(username);
+			return savedUtente;
+		} else {
 			throw new UserException("non esiste un utente con questo username: " + username);
 		}
-		
-		System.out.println("username utente " + user.get().getUsername());
-		return user.get();
 	}
 	
 }

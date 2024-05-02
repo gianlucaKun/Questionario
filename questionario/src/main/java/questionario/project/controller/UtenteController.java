@@ -40,7 +40,9 @@ public class UtenteController {
 		return us.selectById(id);
 	}
 
-	@PostMapping("/api/add")
+
+	
+	@PostMapping("/add")
 	public void add(@RequestBody UtenteDTO u) {
 		us.add(u);
 	}
@@ -55,24 +57,26 @@ public class UtenteController {
 		us.delete(id);
 	}
 
-	// angular connection
+//	@GetMapping("/profile")
+//	@CrossOrigin(origins = "http://localhost:4200")
+//	public ResponseEntity<Utente> getUserProfileHandler(@RequestHeader("Authorization") String jwt) throws UserException {
+//
+//	    System.out.println("stampo il valore del token " + jwt);
+//	    System.out.println("sono nel controller utente controller ");
+//
+//	    
+//	    if (!jwt.startsWith("Bearer ")) {
+//	        jwt = "Bearer " + jwt;
+//	    }
+//
+//	    Utente user = us.findUserProfileByJwt(jwt);
+//
+//	    return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+//	}
 
-	@GetMapping("/profile")
-	public ResponseEntity<Utente> getUserProfileHandler(@RequestHeader("Authorization") String jwt) throws UserException {
-
-	    System.out.println("stampo il valore del token " + jwt);
-	    System.out.println("sono nel controller utente controller ");
-
-	    // Verifica se il token ha il prefisso "Bearer "
-	    if (!jwt.startsWith("Bearer ")) {
-	        jwt = "Bearer " + jwt; // Aggiungi il prefisso "Bearer " al token
-	    }
-
-	    Utente user = us.findUserProfileByJwt(jwt);
-
-	    return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+	
+	@GetMapping("/userProfile")
+	public UtenteDTO userProfile(@RequestParam("username") String username) throws UserException {
+		return us.findByUsername(username);
 	}
-
-	
-	
 }
