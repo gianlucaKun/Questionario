@@ -23,7 +23,7 @@ import questionario.project.exception.UserException;
 import questionario.project.service.UtenteService;
 
 @RestController
-@RequestMapping("/utente")
+@RequestMapping("/api/utente")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UtenteController {
 
@@ -58,7 +58,6 @@ public class UtenteController {
 	}
 
 	@GetMapping("/profile")
-	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<Utente> getUserProfileHandler(@RequestHeader("Authorization") String jwt) throws UserException {
 
 	    System.out.println("stampo il valore del token " + jwt);

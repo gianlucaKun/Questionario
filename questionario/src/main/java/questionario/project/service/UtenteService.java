@@ -13,6 +13,7 @@ import questionario.project.entita.Utente;
 import questionario.project.exception.UserException;
 import questionario.project.mapper.UtenteMapper;
 import questionario.project.repository.UtenteRepository;
+import questionario.project.util.JwtUtil;
 
 @Service
 public class UtenteService {
@@ -22,6 +23,9 @@ public class UtenteService {
 	
 	@Autowired
 	UtenteMapper um;
+	
+	@Autowired
+	JwtUtil JWTu;
 	
 	 @Autowired
 	    private PasswordEncoder passwordEncoder;
@@ -88,18 +92,18 @@ public class UtenteService {
 	
 	public Utente findUserProfileByJwt(String jwt) throws UserException {
 		
-		Long id = JwtService.getUserIdFromJwtToken(jwt);
+		String username = JWTu.extractUsername(jwt);
 		
-		System.out.println("id " + id);
+		System.out.println("username " + username);
 		
-		Optional<Utente> user = ur.findById(id);
+		Utente user = ur.findByUsername(username);
 		
 		if(user == null) {
-			throw new UserException("non esiste un utente con questo id: " + id);
+			throw new UserException("non esiste un utente con questo id: " + username);
 		}
 		
-		System.out.println("username utente " + user.get().getUsername());
-		return user.get();
+		System.out.println("username utente " + user.getUsername());
+		return user;
 	}
 	
 	
