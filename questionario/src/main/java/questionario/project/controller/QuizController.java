@@ -35,17 +35,17 @@ public class QuizController {
 		return qs.selectById(id);
 	}
 	
-	@PostMapping("/add")
+	@PostMapping("/admin/add")
 	public void add(@RequestBody QuizDTO q) {
 		qs.add(q);
 	}
 	
-	@PutMapping("/update")
+	@PutMapping("/admin/update")
 	public QuizDTO update(@RequestBody QuizDTO q, @RequestParam("id") Long id) {
 		return qs.update(q, id);
 	}
 	
-	@DeleteMapping("/delete")
+	@DeleteMapping("/admin/delete")
 	public void delete(@RequestParam("id") Long id) {
 		qs.delete(id);
 	}

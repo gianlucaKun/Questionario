@@ -19,4 +19,5 @@ public class Quiz {
     private Long id;
     private String titolo;
     private String descrizione;
+    private String urlImg;
 }

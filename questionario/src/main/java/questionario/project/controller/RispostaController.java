@@ -34,17 +34,17 @@ public class RispostaController {
 		return rs.selectById(id);
 	}
 	
-	@PostMapping("/add")
+	@PostMapping("/admin/add")
 	public void add(@RequestBody RispostaDTO r) {
 		rs.add(r);
 	}
 	
-	@PutMapping("/update")
+	@PutMapping("/admin/update")
 	public RispostaDTO update(@RequestBody RispostaDTO r, @RequestParam("id") Long id) {
 		return rs.update(id, r);
 	}
 	
-	@DeleteMapping("/delete")
+	@DeleteMapping("/admin/delete")
 	public void delete(@RequestParam Long id) {
 		rs.delete(id);
 	}

@@ -29,7 +29,7 @@ public class UtenteController {
 		return us.selectAll();
 	}
 	
-	@GetMapping("/api/find")
+	@GetMapping("/find")
 	public UtenteDTO select(@RequestParam("id") Long id) {
 		return us.selectById(id);
 	}

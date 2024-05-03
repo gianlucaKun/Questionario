@@ -35,17 +35,17 @@ public class DomandaController {
 		return ds.selectById(id);
 	}
 	
-	@PostMapping("/add")
+	@PostMapping("/admin/add")
 	public void add(@RequestBody DomandaDTO d) {
 		ds.add(d);
 	}
 	
-	@PutMapping("/update")
+	@PutMapping("/admin/update")
 	public DomandaDTO update(@RequestBody DomandaDTO d, @RequestParam("id") Long id) {
 		return ds.update(d, id);
 	}
 	
-	@DeleteMapping("/delete")
+	@DeleteMapping("/admin/delete")
 	public void delete(@RequestParam("id") Long id) {
 		ds.delete(id);
 	}

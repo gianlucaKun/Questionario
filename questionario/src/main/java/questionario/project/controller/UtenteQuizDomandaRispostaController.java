@@ -45,7 +45,7 @@ public class UtenteQuizDomandaRispostaController {
 		return s.update(u, id);
 	}
 	
-	@DeleteMapping("/delete")
+	@DeleteMapping("/admin/delete")
 	public void update(@RequestParam("id") Long id) {
 		s.delete(id);
 	}
