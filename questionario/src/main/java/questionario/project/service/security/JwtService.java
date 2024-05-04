@@ -23,7 +23,7 @@ public class JwtService {
 //    private long EXPIRATION_TIME;
 	
     // Chiave segreta per la firma del token
-    private static final String SECRET_KEY = "laTuaChiaveSegreta";
+    private static final String SECRET_KEY = "afsergthrjydjyh53g43t34gt5g5hhtrhtrhyrjtmutdmmuymygrnryhrhrthyhbegrgfgdgergetg55y64225y46u7i7";
 
     // Durata di validità del token in millisecondi (1 ora)
     private static final long EXPIRATION_TIME = 3600000;
@@ -45,7 +45,7 @@ public class JwtService {
                 .setIssuedAt(now)
                 .claim("id", u.getId())
                 .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                .signWith(SignatureAlgorithm.HS512, SECRET_KEY )
                 .compact();
     }
 

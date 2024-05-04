@@ -1,5 +1,7 @@
 package questionario.project.controller.login;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,7 @@ import questionario.project.service.security.JwtService;
 
 @RestController
 @RequestMapping("/jwt")
-@CrossOrigin(origins = "http://localhost:5173/")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class LoginController {
 	
     @Autowired
@@ -25,22 +27,21 @@ public class LoginController {
     private UtenteService us;
 	
     @PostMapping("/loginUtente")
-    public ResponseEntity<String> login(@RequestBody UtenteDTO loginRequest) {
-    	System.out.println(loginRequest.getUsername() + " | " + loginRequest.getPassword());
+    public ResponseEntity<?> login(@RequestBody UtenteDTO loginRequest) {
+        System.out.println(loginRequest.getUsername() + " | " + loginRequest.getPassword());
+        
         // Esegui l'autenticazione dell'utente
         boolean authenticationResult = us.login(loginRequest.getUsername(), loginRequest.getPassword());
         
         if (authenticationResult) {
-        	
             // Se l'autenticazione ha successo, genera un token JWT per l'utente
             String token = jwtService.generateToken(loginRequest.getUsername());
 
-            // Restituisci il token nella risposta
-            return ResponseEntity.ok(token);
+            // Incapsula il token in un oggetto JSON
+            return ResponseEntity.ok(Map.of("token", token));
         } else {
             // Se l'autenticazione fallisce, restituisci una risposta con codice di stato 401 (Non autorizzato)
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Autenticazione fallita");
         }
     }
-
 }

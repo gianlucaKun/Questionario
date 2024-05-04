@@ -20,10 +20,10 @@ public class UtenteQuizDomanda {
 	private Long id;
 
 	@ManyToOne
-	private UtenteQuiz UtenteQuiz;
+	private UtenteQuiz utenteQuiz;
 
 	@ManyToOne
-	private Domanda Domanda;
+	private Domanda domanda;
 
 	private String utenteNote;
 	private String teacherNotes;

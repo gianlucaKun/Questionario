@@ -17,8 +17,8 @@ import questionario.project.dto.UtenteQuizDTO;
 import questionario.project.service.UtenteQuizService;
 
 @RestController
-@RequestMapping("/utente/quiz")
-@CrossOrigin(origins = "http://localhost:5173/")
+@RequestMapping("/api/utente/quiz")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class UtenteQuizController {
 	
 	@Autowired
@@ -35,8 +35,9 @@ public class UtenteQuizController {
 	}
 	
 	@PostMapping("/add")
-	public void add(@RequestBody UtenteQuizDTO q) {
-		s.add(q);
+	public UtenteQuizDTO add(@RequestBody UtenteQuizDTO q) {
+		
+		return s.add(q);
 	}
 	
 	@PutMapping("/update")

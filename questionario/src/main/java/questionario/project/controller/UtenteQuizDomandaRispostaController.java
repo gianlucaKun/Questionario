@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/utente/quiz/domanda/risposta")
-@CrossOrigin(origins = "http://localhost:5173/")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class UtenteQuizDomandaRispostaController {
 	
 	@Autowired

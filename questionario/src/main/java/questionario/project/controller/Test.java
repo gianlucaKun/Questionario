@@ -11,7 +11,7 @@ import java.util.Map;
 
 @SpringBootApplication
 @RestController
-@CrossOrigin(origins = "http://localhost:5173/")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class Test {
 
     @GetMapping("/test")

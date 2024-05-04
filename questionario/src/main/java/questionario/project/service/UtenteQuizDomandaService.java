@@ -54,5 +54,31 @@ public class UtenteQuizDomandaService {
 	public void delte(Long id) {
 		uqdr.deleteById(id);
 	}
-	
+//	public boolean findByUQid(long uQid) {
+//		 return uqdr.existsByUtenteQuizId(uQid);		
+//	}
+//	
+	 public void updateAllService(Long utenteQuizId, Long domandaId, UtenteQuizDomandaDTO u) {
+	        UtenteQuizDomanda optionalUtenteQuizDomanda = uqdr.findByUtenteQuizIdAndDomandaId(utenteQuizId, domandaId);
+	        if (optionalUtenteQuizDomanda != null) {
+	            UtenteQuizDomanda utenteQuizDomanda = new UtenteQuizDomanda();
+	            utenteQuizDomanda.setId(optionalUtenteQuizDomanda.getId());
+	            utenteQuizDomanda.setDomanda(optionalUtenteQuizDomanda.getDomanda());
+	            utenteQuizDomanda.setUtenteQuiz(optionalUtenteQuizDomanda.getUtenteQuiz());
+	            utenteQuizDomanda.setDoLater(u.getDoLater());
+	            utenteQuizDomanda.setPoints(optionalUtenteQuizDomanda.getPoints());
+	            utenteQuizDomanda.setTeacherNotes(optionalUtenteQuizDomanda.getTeacherNotes());
+	            utenteQuizDomanda.setUtenteNote(u.getUtenteNote());
+	            uqdr.save(utenteQuizDomanda);            
+	        } else {
+	            System.out.println("Errore nell'update della domanda in UTENTEQUIZDOMANDA con domanda id " + domandaId + " e utentequizdomandaid " + utenteQuizId);
+	        }
+	    }
+	public UtenteQuizDomandaDTO getDoLaterUtenteNoteService(Long utenteQuizId, Long domandaId) {
+		UtenteQuizDomanda optionalUtenteQuizDomanda = uqdr.findByUtenteQuizIdAndDomandaId(utenteQuizId, domandaId);
+		
+		
+		return uqdm.utenteQuizDomandaToDto(optionalUtenteQuizDomanda);
+		
+	}
 }

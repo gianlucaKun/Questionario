@@ -17,8 +17,8 @@ import questionario.project.dto.UtenteQuizDomandaDTO;
 import questionario.project.service.UtenteQuizDomandaService;
 
 @RestController
-@RequestMapping("/utente/quiz/domanda")
-@CrossOrigin(origins = "http://localhost:5173/")
+@RequestMapping("/api/utente/quiz/domanda")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class UtenteQuizDomandaController {
 	
 	@Autowired
@@ -34,6 +34,11 @@ public class UtenteQuizDomandaController {
 		return s.selectById(id);
 	}
 	
+	@GetMapping("/getDoLaterUtenteNote")
+	public UtenteQuizDomandaDTO getDoLaterUtenteNote (@RequestParam("utenteQuizId") Long id, @RequestParam("domandaId") Long domandaId) {
+		return s.getDoLaterUtenteNoteService(id, domandaId);
+	}
+
 	@PostMapping("/add")
 	public void add(@RequestBody UtenteQuizDomandaDTO u) {
 		s.add(u);
@@ -42,6 +47,11 @@ public class UtenteQuizDomandaController {
 	@PutMapping("/update")
 	public UtenteQuizDomandaDTO update(@RequestParam("id") Long id, @RequestBody UtenteQuizDomandaDTO u) {
 		return s.update(id, u);
+	}
+	
+	@PutMapping("/updateAll")
+	public void updateAll(@RequestParam("utenteQuizId") Long id, @RequestParam("domandaId") Long domandaId, @RequestBody UtenteQuizDomandaDTO u) {
+		s.updateAllService(id, domandaId, u) ;
 	}
 	
 	@DeleteMapping("delete")

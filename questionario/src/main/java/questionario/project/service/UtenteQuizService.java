@@ -22,8 +22,13 @@ public class UtenteQuizService {
 	UtenteQuizMapper uqm;
 	//crud basic
 	//aggiungi
-	public void add(UtenteQuizDTO q) {
-		uqr.save(uqm.utenteQuizDtoToEntity(q));
+	public UtenteQuizDTO add(UtenteQuizDTO q) {
+		UtenteQuiz r = new UtenteQuiz();
+		r = uqm.utenteQuizDtoToEntity(q);
+		
+		uqr.save(r);
+		
+		return uqm.utenteQuizToDto(r);
 	}
 	//seletc* all
 	public List<UtenteQuizDTO> selectAll(){
