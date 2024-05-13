@@ -18,7 +18,7 @@ import questionario.project.dto.proiezione.QuizProiezione;
 import questionario.project.service.QuizService;
 
 @RestController
-@RequestMapping("/api/quiz")
+@RequestMapping("/quiz")
 @CrossOrigin(origins = "http://localhost:5173/")
 public class QuizController {
 	

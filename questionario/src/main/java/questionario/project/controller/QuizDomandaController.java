@@ -35,6 +35,12 @@ public class QuizDomandaController {
 		return s.selectById(id);
 	}
 	
+	// creare un get mapping che prende un id di un quiz e mi restituisce un arrai di id domande
+	@GetMapping("/find_domande")
+	public List<Long> getAllDomande(@RequestParam("id") Long id) {
+		return s.selectByIdQuiz(id);
+	}
+	
 	@PostMapping("/add")
 	public void add(@RequestBody QuizDomandaDTO q) {
 		s.add(q);

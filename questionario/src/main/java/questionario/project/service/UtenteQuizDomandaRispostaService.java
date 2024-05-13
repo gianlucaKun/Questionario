@@ -46,6 +46,11 @@ public class UtenteQuizDomandaRispostaService {
 		uqdrr.save(r);
 		return uqdrm.utenteQuizDomandaRispostaToDto(r);
 	}
+	
+	public Long getIdCreated(Long idRisposta, Long idUQD) {
+		return uqdrr.returnId(idRisposta, idUQD);
+	}
+	
 	//delete
 	public void delete(Long id) {
 		uqdrr.deleteById(id);

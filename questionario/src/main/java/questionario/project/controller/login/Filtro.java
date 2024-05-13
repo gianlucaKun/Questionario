@@ -2,10 +2,8 @@ package questionario.project.controller.login;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Enumeration;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -19,9 +17,7 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
 import questionario.project.service.security.JwtService;
-import questionario.project.service.security.JwtValidator;
 
 @Component
 @Order(1)
@@ -35,24 +31,31 @@ public class Filtro implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
         HttpServletRequest request = (HttpServletRequest) req;
         
-        Collections.list(request.getHeaderNames())
-        .forEach(headerName -> System.out.println("Header ricevuto dal frontend: " + headerName + ": " + request.getHeader(headerName)));
+//        Collections.list(request.getHeaderNames())
+//        .forEach(headerName -> System.out.println("Header ricevuto dal frontend: " + headerName + ": " + request.getHeader(headerName)));
         
         System.out.println("sei nel filtro dell'utente");
 
         String requestURI = request.getRequestURI();
         System.out.println("url: " + requestURI);
         
-        if (!requestURI.contains("loginUtente") && !requestURI.contains("admin")) {
-            String token = request.getHeader("Authorization");
-            System.out.println(token);
-            
-            if (!js.validateToken(token)) {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                return;
-            }
-            request.setAttribute("token", token);
-        }
+        String requestMethod = request.getMethod();
+        System.out.println("method: " + requestMethod);
+        
+      String token = request.getHeader("Authorization");
+      System.out.println(token);
+        
+//        if (!requestURI.contains("loginUtente") && !requestURI.contains("admin")) {
+//            String token = request.getHeader("Authorization");
+//            System.out.println(token);
+//            System.out.println("token filtro 1 :" + token);
+//            
+//            if (!js.validateToken(token)) {
+//                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//                return;
+//            }
+//            request.setAttribute("token", token);
+//        }
 
         chain.doFilter(request, response);
     }

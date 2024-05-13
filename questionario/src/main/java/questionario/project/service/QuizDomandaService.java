@@ -48,8 +48,12 @@ public class QuizDomandaService {
 		qdr.save(qd);
 		return qdm.quizDomandaToDto(qd);
 	}
+	
 	//delete
 	public void delete(Long id) {
 		qdr.deleteById(id);
+	}
+	public List<Long> selectByIdQuiz(Long id) {
+		return qdr.findDomandebyQuiz(id);
 	}
 }

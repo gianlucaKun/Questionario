@@ -35,7 +35,7 @@ public class JwtService {
     public String generateToken(String username) {
     	System.out.println(username);
     	Utente u = ur.findByUsername(username);
-    	//System.out.println(u.getPassword());
+    	System.out.println(u);
     	
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + EXPIRATION_TIME);

@@ -36,8 +36,9 @@ public class UtenteQuizDomandaRispostaController {
 	}
 	
 	@PostMapping("/add")
-	public void add(@RequestBody UtenteQuizDomandaRispostaDTO u) {
+	public Long add(@RequestBody UtenteQuizDomandaRispostaDTO u) {
 		s.add(u);
+		return s.getIdCreated(u.getRispostaId(), u.getUtenteQuizDomandaId());
 	}
 	
 	@PutMapping("/update")

@@ -35,8 +35,9 @@ public class UtenteQuizDomandaController {
 	}
 	
 	@PostMapping("/add")
-	public void add(@RequestBody UtenteQuizDomandaDTO u) {
+	public UtenteQuizDomandaDTO add(@RequestBody UtenteQuizDomandaDTO u) {
 		s.add(u);
+		return s.getLast(u.getDomandaId(), u.getUtenteQuizId());
 	}
 	
 	@PutMapping("/update")

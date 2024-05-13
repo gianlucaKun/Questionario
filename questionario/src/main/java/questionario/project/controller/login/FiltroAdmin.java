@@ -1,10 +1,8 @@
 package questionario.project.controller.login;
 
 import java.io.IOException;
-import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -33,16 +31,17 @@ import questionario.project.service.security.JwtService;
 	        String requestURI = request.getRequestURI();
 	        
 	        System.out.println("sei nel filtro dell'amministratore");
-	        
-            if (requestURI.contains("admin")) {
-                String token = request.getHeader("Authorization");
-	            
-            	if(!js.validateTokenAdmin(token)) {
-                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                    return;
-            	}
-            }
 
+//            if (requestURI.contains("admin")) {
+//                String token = request.getHeader("Authorization");
+//                System.out.println("token filtro 2 :" + token);
+//	            
+//            	if(!js.validateTokenAdmin(token)) {
+//                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//                    return;
+//            	}
+//            }
+	        
 	        chain.doFilter(request, response);
 	    }
 

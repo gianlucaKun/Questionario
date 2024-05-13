@@ -33,6 +33,11 @@ public class RispostaService {
 	public RispostaDTO selectById(Long id) {
 		return rm.toDTO(rr.findById(id).orElse(null));
 	}
+	
+	public List<Long> selectByIdDomanda(Long id) {
+		return rr.trovaIdRisposte(id);
+	}
+	
 	@Autowired
 	DomandaRepository dr;
 	//update

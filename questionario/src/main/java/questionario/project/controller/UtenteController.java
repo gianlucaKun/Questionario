@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 
 import questionario.project.dto.UtenteDTO;
 import questionario.project.service.UtenteService;
+import questionario.project.service.security.JwtService;
 
 @RestController
 @RequestMapping("/utente")
@@ -23,6 +26,9 @@ public class UtenteController {
 	
 	@Autowired
 	UtenteService us;
+	
+    @Autowired
+    private JwtService js;
 	
 	@GetMapping("/all")
 	public List<UtenteDTO> getAll() {
@@ -35,8 +41,12 @@ public class UtenteController {
 	}
 	
 	@PostMapping("/add")
-	public void add(@RequestBody UtenteDTO u) {
+	public ResponseEntity<String> add(@RequestBody UtenteDTO u) {
 		us.add(u);
+		System.out.println(u.getUsername());
+		String token = js.generateToken(u.getUsername());
+		System.out.println(token);
+		return ResponseEntity.ok(token);
 	}
 	
 	@PutMapping("/update")

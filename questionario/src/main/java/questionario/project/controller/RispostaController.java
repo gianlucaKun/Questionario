@@ -34,6 +34,11 @@ public class RispostaController {
 		return rs.selectById(id);
 	}
 	
+	@GetMapping("/trova_risposte")
+	public List<Long> findById(@RequestParam Long id){
+		return rs.selectByIdDomanda(id);
+	}
+	
 	@PostMapping("/admin/add")
 	public void add(@RequestBody RispostaDTO r) {
 		rs.add(r);

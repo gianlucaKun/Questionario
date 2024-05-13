@@ -55,4 +55,8 @@ public class UtenteQuizDomandaService {
 		uqdr.deleteById(id);
 	}
 	
+	public UtenteQuizDomandaDTO getLast(long id, long idQU) {
+		return uqdm.utenteQuizDomandaToDto(uqdr.getLastSubmit(id, idQU));
+	}
+	
 }

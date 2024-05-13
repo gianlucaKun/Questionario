@@ -53,4 +53,8 @@ public class UtenteQuizService {
 		uqr.deleteById(id);
 	}
 	
+	public Long getIdCreated(Long id) {
+		return uqr.getIdAppenaCreato(id);
+	}
+	
 }
