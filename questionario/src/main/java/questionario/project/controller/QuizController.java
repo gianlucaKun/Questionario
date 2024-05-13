@@ -18,39 +18,38 @@ import questionario.project.dto.proiezione.QuizProiezione;
 import questionario.project.service.QuizService;
 
 @RestController
-@RequestMapping("/api/quiz")
 @CrossOrigin(origins = "http://localhost:4200/")
 public class QuizController {
 	
 	@Autowired
 	QuizService qs;
 	
-	@GetMapping("/all")
+	@GetMapping("/quiz/all")
 	public List<QuizDTO> getAll(){
 		return qs.selectAll();
 	}
 	
-	@GetMapping("/find")
+	@GetMapping("/api/quiz/find")
 	public QuizDTO getMethodName(@RequestParam("id") Long id) {
 		return qs.selectById(id);
 	}
 	
-	@PostMapping("/add")
+	@PostMapping("/api/quiz/add")
 	public void add(@RequestBody QuizDTO q) {
 		qs.add(q);
 	}
 	
-	@PutMapping("/update")
+	@PutMapping("/api/quiz/update")
 	public QuizDTO update(@RequestBody QuizDTO q, @RequestParam("id") Long id) {
 		return qs.update(q, id);
 	}
 	
-	@DeleteMapping("/delete")
+	@DeleteMapping("/api/quiz/delete")
 	public void delete(@RequestParam("id") Long id) {
 		qs.delete(id);
 	}
 	
-	@GetMapping("/getFullQuiz")
+	@GetMapping("/api/quiz/getFullQuiz")
 	public QuizProiezione getFull(@RequestParam("id") Long id) {
 		return qs.getFullQuiz(id);
 	}

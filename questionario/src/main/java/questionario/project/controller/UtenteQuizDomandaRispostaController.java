@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
-@RequestMapping("/utente/quiz/domanda/risposta")
+@RequestMapping("/api/utente/quiz/domanda/risposta")
 @CrossOrigin(origins = "http://localhost:4200/")
 public class UtenteQuizDomandaRispostaController {
 	
@@ -36,14 +36,16 @@ public class UtenteQuizDomandaRispostaController {
 	}
 	
 	@PostMapping("/add")
-	public void add(@RequestBody UtenteQuizDomandaRispostaDTO u) {
-		s.add(u);
+	public UtenteQuizDomandaRispostaDTO add(@RequestBody UtenteQuizDomandaRispostaDTO u) {
+		return s.add(u);
 	}
 	
 	@PutMapping("/update")
 	public UtenteQuizDomandaRispostaDTO update(@RequestBody UtenteQuizDomandaRispostaDTO u, @RequestParam("id") Long id) {
 		return s.update(u, id);
 	}
+	
+	
 	
 	@DeleteMapping("/delete")
 	public void update(@RequestParam("id") Long id) {

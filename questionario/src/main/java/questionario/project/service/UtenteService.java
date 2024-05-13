@@ -21,8 +21,9 @@ public class UtenteService {
 	
 	//crud basic
 	//add
-	public void add(UtenteDTO u) {
-		ur.save(um.toEntity(u));
+	public UtenteDTO add(UtenteDTO u) {
+		Utente utente = ur.save(um.toEntity(u));
+		return um.toDTO(utente);
 	}
 	//select * all
 	public List<UtenteDTO> selectAll() {

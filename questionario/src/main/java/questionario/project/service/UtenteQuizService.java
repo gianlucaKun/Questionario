@@ -57,5 +57,9 @@ public class UtenteQuizService {
 	public void delete(Long id) {
 		uqr.deleteById(id);
 	}
+	public UtenteQuiz findIfExist(Long utenteId, Long quizId) {
+		UtenteQuiz exist = uqr.findByUtenteIdAndQuizId(utenteId, quizId);
+		return exist;
+	}
 	
 }

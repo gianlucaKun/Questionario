@@ -23,8 +23,9 @@ public class UtenteQuizDomandaService {
 	
 	//crud basic
 	//add
-	public void add(UtenteQuizDomandaDTO u) {
-		uqdr.save(uqdm.utenteQuizDomandaDtoToEntity(u));
+	public UtenteQuizDomandaDTO add(UtenteQuizDomandaDTO u) {
+		UtenteQuizDomanda newRecord = uqdr.save(uqdm.utenteQuizDomandaDtoToEntity(u));
+		return uqdm.utenteQuizDomandaToDto(newRecord);
 	}
 	//select *all 
 	public List<UtenteQuizDomandaDTO> selectAll(){

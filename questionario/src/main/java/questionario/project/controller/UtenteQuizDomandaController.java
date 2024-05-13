@@ -38,10 +38,11 @@ public class UtenteQuizDomandaController {
 	public UtenteQuizDomandaDTO getDoLaterUtenteNote (@RequestParam("utenteQuizId") Long id, @RequestParam("domandaId") Long domandaId) {
 		return s.getDoLaterUtenteNoteService(id, domandaId);
 	}
-
+	
+	
 	@PostMapping("/add")
-	public void add(@RequestBody UtenteQuizDomandaDTO u) {
-		s.add(u);
+	public UtenteQuizDomandaDTO add(@RequestBody UtenteQuizDomandaDTO u) {
+		return s.add(u);
 	}
 	
 	@PutMapping("/update")

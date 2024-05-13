@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import questionario.project.dto.UtenteQuizDTO;
+import questionario.project.entita.UtenteQuiz;
 import questionario.project.service.UtenteQuizService;
 
 @RestController
@@ -32,6 +33,10 @@ public class UtenteQuizController {
 	@GetMapping("/find")
 	public UtenteQuizDTO select(@RequestParam("id") Long id) {
 		return s.selectByID(id);
+	}
+	@GetMapping("/findIfExist")
+	public UtenteQuiz findIfExist(@RequestParam("utenteId") Long utenteId, @RequestParam("quizId") Long quizId) {
+		return s.findIfExist(utenteId, quizId);
 	}
 	
 	@PostMapping("/add")

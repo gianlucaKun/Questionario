@@ -22,8 +22,9 @@ public class UtenteQuizDomandaRispostaService {
 	UtenteQuizDomandaRispostaMapper uqdrm;
 	//crud basilari
 	//add
-	public void add(UtenteQuizDomandaRispostaDTO u) {
-		uqdrr.save(uqdrm.utenteQuizDomandaRispostaDtoToEntity(u));
+	public UtenteQuizDomandaRispostaDTO add(UtenteQuizDomandaRispostaDTO u) {
+		UtenteQuizDomandaRisposta newRecord =  uqdrr.save(uqdrm.utenteQuizDomandaRispostaDtoToEntity(u));
+		return uqdrm.utenteQuizDomandaRispostaToDto(newRecord);
 	}
 	//select * all
 	public List<UtenteQuizDomandaRispostaDTO> seletcAll(){
@@ -46,6 +47,7 @@ public class UtenteQuizDomandaRispostaService {
 		uqdrr.save(r);
 		return uqdrm.utenteQuizDomandaRispostaToDto(r);
 	}
+	
 	//delete
 	public void delete(Long id) {
 		uqdrr.deleteById(id);

@@ -1,8 +1,10 @@
 package questionario.project.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import questionario.project.dto.UtenteDTO;
 import questionario.project.service.UtenteService;
+import questionario.project.service.security.JwtService;
 
 @RestController
 @RequestMapping("/utente")
@@ -23,6 +26,9 @@ public class UtenteController {
 	
 	@Autowired
 	UtenteService us;
+	
+    @Autowired
+    private JwtService jwtService;
 	
 	@GetMapping("/all")
 	public List<UtenteDTO> getAll() {
@@ -35,9 +41,14 @@ public class UtenteController {
 	}
 	
 	@PostMapping("/add")
-	public void add(@RequestBody UtenteDTO u) {
-		us.add(u);
+	public ResponseEntity<?> add(@RequestBody UtenteDTO u) {
+	    UtenteDTO newUser = us.add(u);
+	    String token = jwtService.generateToken(newUser.getUsername()); // Metodo per generare il token JWT per il nuovo utente
+
+
+	    return ResponseEntity.ok(Map.of("token", token));
 	}
+
 	
 	@PutMapping("/update")
 	public UtenteDTO update(@RequestBody UtenteDTO u, @RequestParam("id") Long  id) {
