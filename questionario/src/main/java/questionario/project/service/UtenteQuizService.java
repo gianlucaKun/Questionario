@@ -62,4 +62,8 @@ public class UtenteQuizService {
 		return exist;
 	}
 	
+	public Long getIdCreated(Long id) {
+		return uqr.getIdAppenaCreato(id);
+	}
+	
 }

@@ -41,6 +41,7 @@ public class QuizService {
 		Quiz q = qr.findById(id).orElse(null);
 		q.setDescrizione(qb.getDescrizione() != null ? qb.getDescrizione() : q.getDescrizione());
 		q.setTitolo(qb.getTitolo() != null ? qb.getTitolo() : q.getTitolo());
+		q.setUrlImg(qb.getUrlImg() != null ? qb.getUrlImg() : q.getUrlImg());
 		qr.save(q);
 		return qm.toDTO(q);
 	}
@@ -61,6 +62,7 @@ public class QuizService {
 		q.setId(id);
 		q.setTitolo(qr.findById(id).orElse(null).getTitolo());
 		q.setDescrizione(qr.findById(id).orElse(null).getDescrizione());
+		q.setUrlImg(qr.findById(id).orElse(null).getUrlImg());
 		List<DomandaProiezione> lista = new ArrayList<DomandaProiezione>(); 
 		for(Long q2 : qdr.findDomandebyQuiz(id)) {
 			lista.add(ds.getRisposte(q2));

@@ -20,5 +20,7 @@ public class UtenteDTO {
     
     private String imgUrl;
     private String imgCopertina;
+    
+    private String role;
 
 }

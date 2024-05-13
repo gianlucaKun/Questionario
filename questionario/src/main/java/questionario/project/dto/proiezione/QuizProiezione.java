@@ -7,11 +7,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
+
 public class QuizProiezione {
 	
 	private Long id;
-	private String titolo, descrizione;
+	private String titolo, descrizione, urlImg;
 	
 	private List<DomandaProiezione> listaDomande;
 

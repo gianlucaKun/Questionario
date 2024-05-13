@@ -35,7 +35,7 @@ public class JwtService {
     public String generateToken(String username) {
     	System.out.println(username);
     	Utente u = ur.findByUsername(username);
-    	//System.out.println(u.getPassword());
+    	System.out.println(u);
     	
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + EXPIRATION_TIME);
@@ -44,6 +44,7 @@ public class JwtService {
                 .setSubject(username)
                 .setIssuedAt(now)
                 .claim("id", u.getId())
+                .claim("role", u.getRole())
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY )
                 .compact();
@@ -62,6 +63,23 @@ public class JwtService {
             // Se si verifica un'eccezione durante il parsing del token, il token non è valido
             return false;
         }
+    }
+    
+    public boolean validateTokenAdmin(String token) {
+      try {
+    	Claims claims = parseToken(token);
+    	System.out.println("sei nel validatore dell'admin");
+    	String ruolo = claims.get("role").toString();
+    	System.out.println("ruolo: "+ ruolo.toString());
+    	if(ruolo.equals("Amministratore")) {
+    		System.out.println("controllo superato");
+    		return true;
+    	} else return false;
+    } catch (Exception e) {
+        // Se si verifica un'eccezione durante il parsing del token, il token non è valido
+        return false;
+    }
+    	
     }
     
     //prende un toke e ne restituisce un claim

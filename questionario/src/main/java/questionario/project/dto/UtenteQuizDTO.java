@@ -2,6 +2,7 @@ package questionario.project.dto;
 
 import lombok.Data;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class UtenteQuizDTO {
@@ -11,4 +12,5 @@ public class UtenteQuizDTO {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String note;
+    private List<UtenteQuizDomandaDTO> domande; // Aggiunto per includere le domande associate
 }

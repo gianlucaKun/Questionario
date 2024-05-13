@@ -1,5 +1,7 @@
 package questionario.project.dto;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -11,4 +13,5 @@ public class UtenteQuizDomandaDTO {
     private String teacherNotes;
     private Boolean doLater;
     private Long points;
+    private List<UtenteQuizDomandaRispostaDTO> risposte; // Aggiunto per includere le domande associate
 }
